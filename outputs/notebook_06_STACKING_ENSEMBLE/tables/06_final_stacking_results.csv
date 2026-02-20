@@ -1,0 +1,2 @@
+Model,R2,Weights_SVR,Weights_XGB,Weights_Ridge,Weights_MLR
+Stacking Ensemble,0.97055,0.3846,0.277,0.1833,0.1649
