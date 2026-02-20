@@ -1,0 +1,6 @@
+Model,R²,RMSE,MAE,Training Time,Beat Baseline?,R2
+MLR (Baseline),0.9699,0.3086,0.2448,,-,
+Random Forest,,,,213.8s,No,0.906834633341474
+Gradient Boosting,,,,158.7s,No,0.956765526850947
+XGBoost,,,,50.8s,No,0.9584307724291378
+SVR,,,,184.0s,No,0.9694625661234225
