@@ -1,0 +1,46 @@
+|--- train_E7 <= 2.50
+|   |--- Digital_x_Training <= 0.09
+|   |   |--- res_D4 <= 2.50
+|   |   |   |--- train_E7 <= 1.50
+|   |   |   |   |--- truncated branch of depth 7
+|   |   |   |--- train_E7 >  1.50
+|   |   |   |   |--- truncated branch of depth 8
+|   |   |--- res_D4 >  2.50
+|   |   |   |--- conf_B6 <= 3.50
+|   |   |   |   |--- truncated branch of depth 9
+|   |   |   |--- conf_B6 >  3.50
+|   |   |   |   |--- truncated branch of depth 9
+|   |--- Digital_x_Training >  0.09
+|   |   |--- res_D3 <= 3.50
+|   |   |   |--- conf_B2 <= 3.50
+|   |   |   |   |--- truncated branch of depth 9
+|   |   |   |--- conf_B2 >  3.50
+|   |   |   |   |--- truncated branch of depth 7
+|   |   |--- res_D3 >  3.50
+|   |   |   |--- conf_B6 <= 3.50
+|   |   |   |   |--- truncated branch of depth 5
+|   |   |   |--- conf_B6 >  3.50
+|   |   |   |   |--- truncated branch of depth 5
+|--- train_E7 >  2.50
+|   |--- res_D2 <= 3.50
+|   |   |--- conf_B2 <= 3.50
+|   |   |   |--- digi_C1d <= 2.50
+|   |   |   |   |--- truncated branch of depth 12
+|   |   |   |--- digi_C1d >  2.50
+|   |   |   |   |--- truncated branch of depth 13
+|   |   |--- conf_B2 >  3.50
+|   |   |   |--- Digital_x_Training <= 0.16
+|   |   |   |   |--- truncated branch of depth 13
+|   |   |   |--- Digital_x_Training >  0.16
+|   |   |   |   |--- truncated branch of depth 7
+|   |--- res_D2 >  3.50
+|   |   |--- conf_B2 <= 3.50
+|   |   |   |--- digi_C1c <= 2.50
+|   |   |   |   |--- truncated branch of depth 6
+|   |   |   |--- digi_C1c >  2.50
+|   |   |   |   |--- truncated branch of depth 8
+|   |   |--- conf_B2 >  3.50
+|   |   |   |--- Digital_x_Training <= 0.29
+|   |   |   |   |--- truncated branch of depth 12
+|   |   |   |--- Digital_x_Training >  0.29
+|   |   |   |   |--- truncated branch of depth 5

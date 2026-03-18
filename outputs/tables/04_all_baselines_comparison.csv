@@ -1,0 +1,6 @@
+Model,R2 (CV),RMSE (CV),MAE (CV),Features Used,Interpretability,Non-linear Captured
+Dummy (Mean),-0.0863,1.8578,1.4797,0,Very High,No
+Multiple Linear Regression,0.9699,0.3086,0.2448,19,High,No
+Lasso,0.9699,,,18,High,No
+Ridge,0.9699,0.3086,,19,High,No
+Decision Tree,0.7303,0.9254,,19,Very High,Yes

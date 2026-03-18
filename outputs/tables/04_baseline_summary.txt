@@ -1,0 +1,12 @@
+BASELINE MODELS SUMMARY
+==================================================
+                        Model  R2 (CV)  RMSE (CV)  MAE (CV)  Features Used Interpretability Non-linear Captured
+0                Dummy (Mean)  -0.0863     1.8578    1.4797              0        Very High                  No
+1  Multiple Linear Regression   0.9699     0.3086    0.2448             19             High                  No
+2                       Lasso   0.9699        NaN       NaN             18             High                  No
+3                       Ridge   0.9699     0.3086       NaN             19             High                  No
+4               Decision Tree   0.7303     0.9254       NaN             19        Very High                 Yes
+
+1. MLR achieves R2 = 0.9699 - relationships are primarily linear
+2. Confidence and Digital skills are strongest predictors
+3. Training quality > attendance
