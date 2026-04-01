@@ -1,4 +1,4 @@
-# 🎓 Teacher Readiness Index (TRI)
+# Teacher Readiness Index (TRI)
 ### Modelling Teacher Readiness for Competency-Based Education: A Machine Learning Approach in Nakuru County, Kenya
 
 > **MSc Thesis** | Peter Kanyuira Wachugu | Strathmore University, Institute of Mathematical Sciences | March 2026  
@@ -6,7 +6,7 @@
 
 ---
 
-## 📌 Overview
+## Overview
 
 Over 5,000 Kenyan secondary schools received **no Grade 10 applications in 2024** — a visible consequence of widespread doubt about teacher preparedness for the Competency-Based Curriculum (CBC). This project addresses that crisis directly.
 
@@ -14,12 +14,12 @@ The **Teacher Readiness Index (TRI)** is a psychometrically validated, machine-l
 
 ---
 
-## 🏗️ Project Architecture
+## Project Architecture
 
 ```
 TRI-Project/
 │
-├── 📊 Data (Raw & Processed)
+├──  Data (Raw & Processed)
 │   ├── google_forms_teacher_survey_raw.csv        # 1,200 teachers × 46 items
 │   ├── google_forms_principal_survey_raw.csv      # 100 principals × 15 items
 │   ├── teacher_survey_cleaned_keyvars.csv         # Output of Notebook 01
@@ -27,7 +27,7 @@ TRI-Project/
 │   ├── teacher_readiness_train.csv                # Output of Notebook 03 (80%)
 │   └── teacher_readiness_test.csv                 # Output of Notebook 03 (20%)
 │
-├── 📓 Notebooks (8 sequential analysis stages)
+├──  Notebooks (8 sequential analysis stages)
 │   ├── 01_data_loading_eda.ipynb
 │   ├── 02_psychometric_validation.ipynb
 │   ├── 03_feature_engineering.ipynb
@@ -37,7 +37,7 @@ TRI-Project/
 │   ├── 07_final_evaluation.ipynb
 │   └── 08_fairness_robustness.ipynb
 │
-├── 🤖 Model Outputs
+├──  Model Outputs
 │   └── outputs/
 │       ├── notebook_04_BASELINE_MODELS/
 │       ├── notebook_05_ADVANCED_MODELS/
@@ -45,7 +45,7 @@ TRI-Project/
 │       └── notebook_07_MODEL_INTERPRETATION/
 │           └── models/07_final_stacking_model.pkl  ← Champion model
 │
-├── 🖥️ Streamlit Application
+├──  Streamlit Application
 │   └── app.py
 │
 ├── requirements.txt
@@ -55,7 +55,7 @@ TRI-Project/
 
 ---
 
-## 📊 The TRI Framework
+##  The TRI Framework
 
 The index is built from **28 validated survey items** across four constructs grounded in the TPACK framework:
 
@@ -71,7 +71,7 @@ Scale: **4 – 20** | Mean: **11.46** | Std: **1.83**
 
 ---
 
-## 📓 Notebook Pipeline
+##  Notebook Pipeline
 
 | # | Notebook | What It Does | Key Output |
 |---|---|---|---|
@@ -86,7 +86,7 @@ Scale: **4 – 20** | Mean: **11.46** | Std: **1.83**
 
 ---
 
-## 🤖 Model Results
+##  Model Results
 
 ### Performance Hierarchy
 
@@ -123,7 +123,7 @@ Validation: 5-fold GroupKFold (school-clustered, zero leakage)
 
 ---
 
-## 🔍 Key Findings
+## Key Findings
 
 ### 1. Pedagogical Confidence Dominates
 Self-efficacy (β = 0.461 for classroom management, β = 0.452 for learner engagement) accounts for ~50% of predictive power — consistent with Bandura's Self-Efficacy Theory.
@@ -148,17 +148,17 @@ No group suffers from disadvantageous underprediction. The Private school gap is
 
 ---
 
-## 🖥️ Streamlit Diagnostic Dashboard
+##  Streamlit Diagnostic Dashboard
 
 The app provides five integrated tools:
 
 | Tab | Function |
 |---|---|
-| 📝 Individual Assessment | 19-item diagnostic → TRI score + readiness band + radar chart + personalised recommendations |
-| 🎯 Intervention Simulator | Adjust construct targets → predict TRI improvement before committing resources |
-| 📊 Cohort Analysis | Upload CSV of multiple teachers → school-level TRI distribution + readiness band breakdown |
-| 📈 Progress Tracking | Track score changes across multiple assessments within a session |
-| ℹ️ Technical Documentation | Model performance, feature importance, key findings, references |
+|  Individual Assessment | 19-item diagnostic → TRI score + readiness band + radar chart + personalised recommendations |
+|  Intervention Simulator | Adjust construct targets → predict TRI improvement before committing resources |
+|  Cohort Analysis | Upload CSV of multiple teachers → school-level TRI distribution + readiness band breakdown |
+|  Progress Tracking | Track score changes across multiple assessments within a session |
+|  Technical Documentation | Model performance, feature importance, key findings, references |
 
 ### Run Locally
 
@@ -188,7 +188,7 @@ The app will open at `http://localhost:8501`
 
 ---
 
-## ⚙️ Setup & Requirements
+##  Setup & Requirements
 
 ```bash
 pip install -r requirements.txt
@@ -218,7 +218,7 @@ plotly
 
 ---
 
-## 📐 Methodology Summary
+##  Methodology Summary
 
 | Phase | Approach |
 |---|---|
@@ -234,7 +234,7 @@ plotly
 
 ---
 
-## 📁 Data Notes
+##  Data Notes
 
 - **Raw data** is simulated survey data representative of Nakuru County secondary schools
 - Both CSVs are loaded directly from this GitHub repo via raw URLs in each notebook
@@ -243,7 +243,7 @@ plotly
 
 ---
 
-## 🔒 Ethics & Privacy
+##  Ethics & Privacy
 
 - All survey responses are anonymised; respondent IDs are synthetic
 - No personally identifiable information is stored or transmitted
@@ -252,7 +252,7 @@ plotly
 
 ---
 
-## 📖 Citation
+##  Citation
 
 ```bibtex
 @mastersthesis{wachugu2026tri,
@@ -269,12 +269,12 @@ plotly
 
 ---
 
-## 👤 Author
+##  Author
 
 **Peter Kanyuira Wachugu**  
 MSc Statistical Science, Strathmore University  
-📧 research@strathmore.edu  
-🔗 [github.com/Nyuira](https://github.com/Nyuira)
+ research@strathmore.edu  
+ [github.com/Nyuira](https://github.com/Nyuira)
 
 Supervisor: **Dr. John Olukuru**, Institute of Mathematical Sciences, Strathmore University
 
