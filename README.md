@@ -177,14 +177,7 @@ pip install -r requirements.txt
 streamlit run app.py
 ```
 
-The app will open at `http://localhost:8501`
-
-### Deploy on Streamlit Community Cloud (Free)
-
-1. Push your repo to GitHub (including `app.py`, `requirements.txt`, and `07_final_stacking_model.pkl`)
-2. Go to [share.streamlit.io](https://share.streamlit.io) and sign in with GitHub
-3. Click **New app** → select `Nyuira/TRI-Project` → set main file to `app.py`
-4. Click **Deploy** — your app will be live at `https://nyuira-tri-project.streamlit.app`
+The app will open at https://teacherreadinessindex.streamlit.app/
 
 ---
 
