@@ -145,7 +145,7 @@ st.markdown("""
 # Sidebar - About & Instructions
 with st.sidebar:
     st.image("https://img.icons8.com/fluency/96/teacher.png", width=80)
-    st.markdown("### 📋 About This Tool")
+    st.markdown("### About This Tool")
     st.markdown("""
     This diagnostic tool helps school administrators and education officers:
     
@@ -156,7 +156,7 @@ with st.sidebar:
     """)
     
     st.markdown("---")
-    st.markdown("### 📊 Quick Stats")
+    st.markdown("### Quick Stats")
     
     col1, col2 = st.columns(2)
     with col1:
@@ -167,9 +167,9 @@ with st.sidebar:
             st.metric("Avg Score", f"{avg_score:.1f}")
     
     st.markdown("---")
-    st.markdown("### 📥 Export Options")
+    st.markdown("### Export Options")
     
-    if st.button("📊 Export Session Data", use_container_width=True):
+    if st.button(" Export Session Data", use_container_width=True):
         if st.session_state.previous_predictions:
             export_df = pd.DataFrame(st.session_state.previous_predictions)
             csv = export_df.to_csv(index=False)
@@ -178,7 +178,7 @@ with st.sidebar:
             st.markdown(href, unsafe_allow_html=True)
     
     st.markdown("---")
-    st.markdown("### 🔍 Need Help?")
+    st.markdown("###  Need Help?")
     st.info("""
     For technical support or questions about interpretation, contact:
     **research@strathmore.edu**
@@ -206,18 +206,18 @@ except Exception as e:
 
 # Main content area with tabs
 tab1, tab2, tab3, tab4, tab5 = st.tabs([
-    "📝 Individual Assessment", 
-    "🎯 Intervention Simulator", 
-    "📊 Cohort Analysis",
-    "📈 Progress Tracking",
-    "ℹ️ Technical Documentation"
+    " Individual Assessment", 
+    " Intervention Simulator", 
+    " Cohort Analysis",
+    " Progress Tracking",
+    " Technical Documentation"
 ])
 
 # ============================================
 # TAB 1: INDIVIDUAL ASSESSMENT (FIXED VERSION)
 # ============================================
 with tab1:
-    st.markdown("## 📝 Individual Teacher Readiness Assessment")
+    st.markdown("##  Individual Teacher Readiness Assessment")
     st.markdown("Complete all four sections to generate a personalized readiness profile.")
     
     # Progress tracking
@@ -228,7 +228,7 @@ with tab1:
     
     with left_col:
         # Section 1: Pedagogical Confidence (Psychological Pillar)
-        with st.expander("🧠 Section 1: Pedagogical Confidence", expanded=True):
+        with st.expander(" Section 1: Pedagogical Confidence", expanded=True):
             st.markdown("*How confident are you in these areas?*")
             
             col1, col2 = st.columns(2)
@@ -256,7 +256,7 @@ with tab1:
                 sections_completed += 1
         
         # Section 2: Digital Literacy
-        with st.expander("💻 Section 2: Digital Literacy", expanded=True):
+        with st.expander(" Section 2: Digital Literacy", expanded=True):
             st.markdown("*Rate your digital teaching capabilities*")
             
             col1, col2, col3 = st.columns(3)
@@ -293,7 +293,7 @@ with tab1:
                 sections_completed += 1
         
         # Section 3: Resource Availability
-        with st.expander("🏫 Section 3: Resource Availability", expanded=True):
+        with st.expander(" Section 3: Resource Availability", expanded=True):
             st.markdown("*Assess your school's resources*")
             
             col1, col2 = st.columns(2)
@@ -352,7 +352,7 @@ with tab1:
             sections_completed += 1
         
         # Section 4: Training Quality
-        with st.expander("📚 Section 4: Training Quality", expanded=True):
+        with st.expander(" Section 4: Training Quality", expanded=True):
             st.markdown("*Evaluate your CBC training experience*")
             
             train_attended = st.checkbox("I have attended CBC training", value=True, key="train_attended_tab1")
@@ -414,7 +414,7 @@ with tab1:
                 train_E2 = train_E3 = train_E4 = train_E5 = train_E6 = train_E7 = 1
                 training_attended_binary = 0.0
                 sections_completed += 1
-                st.info("ℹ️ Since no training was attended, training quality defaults to 'Very Poor'.")
+                st.info(" Since no training was attended, training quality defaults to 'Very Poor'.")
             
             # Overall training quality slider (works fine as is)
             train_q = st.select_slider(
@@ -428,11 +428,11 @@ with tab1:
         # Action buttons
         col1, col2, col3 = st.columns([1,1,1])
         with col2:
-            generate_btn = st.button("🎯 Generate Readiness Profile", use_container_width=True, type="primary", key="generate_tab1")
+            generate_btn = st.button(" Generate Readiness Profile", use_container_width=True, type="primary", key="generate_tab1")
     
     with right_col:
         # Display progress
-        st.markdown("### 📊 Assessment Progress")
+        st.markdown("###  Assessment Progress")
         progress = sections_completed / 4
         st.progress(progress)
         st.markdown(f"**Completed:** {sections_completed}/4 sections")
@@ -446,7 +446,7 @@ with tab1:
         st.markdown("---")
         
         # Display quick tips
-        st.markdown("### 💡 Quick Tips")
+        st.markdown("###  Quick Tips")
         st.info("""
         - Answer honestly for accurate results
         - All fields are required
@@ -494,20 +494,20 @@ with tab1:
             
             # Display results in a nice layout
             st.markdown("---")
-            st.markdown("## 📊 Readiness Assessment Results")
+            st.markdown("##  Readiness Assessment Results")
             
             # Three columns for key metrics
             metric1, metric2, metric3 = st.columns(3)
             
             with metric1:
                 st.markdown('<div class="metric-card">', unsafe_allow_html=True)
-                st.markdown("### 📈 TRI Score")
+                st.markdown("###  TRI Score")
                 st.markdown(f'<div class="score-badge">{prediction:.1f}</div>', unsafe_allow_html=True)
                 st.markdown('</div>', unsafe_allow_html=True)
             
             with metric2:
                 st.markdown('<div class="metric-card">', unsafe_allow_html=True)
-                st.markdown("### 🎯 Readiness Band")
+                st.markdown("###  Readiness Band")
                 
                 if prediction < 10:
                     band_class = "band-low"
@@ -524,7 +524,7 @@ with tab1:
             
             with metric3:
                 st.markdown('<div class="metric-card">', unsafe_allow_html=True)
-                st.markdown("### ⏱️ Percentile")
+                st.markdown("###  Percentile")
                 # Approximate percentile based on sample distribution
                 if prediction < 8:
                     percentile = 5
@@ -541,7 +541,7 @@ with tab1:
                 st.markdown('</div>', unsafe_allow_html=True)
             
             # Construct-level breakdown
-            st.markdown("### 📊 Construct-Level Breakdown")
+            st.markdown("###  Construct-Level Breakdown")
             
             # Calculate construct means
             ped_mean = (conf_B2 + conf_B6) / 2
@@ -587,13 +587,13 @@ with tab1:
             st.plotly_chart(fig, use_container_width=True)
             
             # Generate recommendations
-            st.markdown("### 💡 Personalized Recommendations")
+            st.markdown("###  Personalized Recommendations")
             
             col1, col2 = st.columns(2)
             
             with col1:
                 st.markdown('<div class="recommendation-box">', unsafe_allow_html=True)
-                st.markdown("#### 🎯 Priority Interventions")
+                st.markdown("####  Priority Interventions")
                 
                 # Sort constructs by deficit
                 deficits = [
@@ -631,7 +631,7 @@ with tab1:
             
             with col2:
                 st.markdown('<div class="recommendation-box">', unsafe_allow_html=True)
-                st.markdown("#### 📈 Growth Opportunities")
+                st.markdown("####  Growth Opportunities")
                 
                 # Show strengths
                 strengths = [(construct, score) for construct, score, _ in deficits if score >= 3.5]
@@ -670,7 +670,7 @@ with tab1:
 # TAB 2: INTERVENTION SIMULATOR (Keep as is)
 # ============================================
 with tab2:
-    st.markdown("## 🎯 Intervention Impact Simulator")
+    st.markdown("##  Intervention Impact Simulator")
     st.markdown("Model how different interventions could improve readiness scores.")
     
     st.info("""
@@ -750,11 +750,11 @@ with tab2:
 # TAB 3: COHORT ANALYSIS (MORE FLEXIBLE VERSION)
 # ============================================
 with tab3:
-    st.markdown("## 📊 Cohort Analysis")
+    st.markdown("##  Cohort Analysis")
     st.markdown("Upload multiple teacher records to analyze school-level or county-level readiness.")
     
     # Template download
-    with st.expander("📥 Download Template"):
+    with st.expander(" Download Template"):
         template_df = pd.DataFrame({
             'conf_B2': [4, 3, 2],
             'conf_B6': [4, 3, 2],
@@ -790,7 +790,7 @@ with tab3:
             st.success(f"✅ Loaded {len(cohort_df)} teacher records")
             
             # Display column names for debugging (remove this after it works)
-            with st.expander("📋 Column Names in Your File"):
+            with st.expander(" Column Names in Your File"):
                 st.write(cohort_df.columns.tolist())
             
             # Display preview
@@ -851,7 +851,7 @@ with tab3:
                                     cohort_df['Training_Quality'])
                 
                 # Generate summary statistics
-                st.markdown("### 📈 Cohort Summary Statistics")
+                st.markdown("###  Cohort Summary Statistics")
                 
                 col1, col2, col3, col4 = st.columns(4)
                 with col1:
@@ -864,7 +864,7 @@ with tab3:
                     st.metric("Max TRI", f"{cohort_df['TRI'].max():.2f}")
                 
                 # Distribution plot
-                st.markdown("### 📊 TRI Distribution")
+                st.markdown("###  TRI Distribution")
                 fig = px.histogram(
                     cohort_df, 
                     x='TRI', 
@@ -951,11 +951,11 @@ with tab3:
                 st.plotly_chart(fig, use_container_width=True)
                 
                 # Export options
-                st.markdown("### 📥 Export Results")
+                st.markdown("###  Export Results")
                 
                 csv_full = cohort_df.to_csv(index=False)
                 b64_full = base64.b64encode(csv_full.encode()).decode()
-                href_full = f'<a href="data:file/csv;base64,{b64_full}" download="cohort_analysis.csv">📊 Download Full Analysis (CSV)</a>'
+                href_full = f'<a href="data:file/csv;base64,{b64_full}" download="cohort_analysis.csv"> Download Full Analysis (CSV)</a>'
                 st.markdown(href_full, unsafe_allow_html=True)
             
             else:
@@ -974,7 +974,7 @@ with tab3:
 # TAB 4: PROGRESS TRACKING (Keep as is)
 # ============================================
 with tab4:
-    st.markdown("## 📈 Progress Tracking")
+    st.markdown("##  Progress Tracking")
     
     if st.session_state.previous_predictions:
         history_df = pd.DataFrame(st.session_state.previous_predictions)
@@ -1007,9 +1007,9 @@ with tab4:
 # TAB 5: TECHNICAL DOCUMENTATION (Keep as is)
 # ============================================
 with tab5:
-    st.markdown("## ℹ️ Technical Documentation")
+    st.markdown("##  Technical Documentation")
     
-    with st.expander("📊 Model Performance", expanded=True):
+    with st.expander(" Model Performance", expanded=True):
         st.markdown("""
         **Final Stacking Ensemble Performance:**
         - R² Score: **0.9763** on held-out test set
@@ -1033,7 +1033,7 @@ with tab5:
                      title='Ensemble Model Weights')
         st.plotly_chart(fig, use_container_width=True)
     
-    with st.expander("📋 Feature Importance"):
+    with st.expander(" Feature Importance"):
         st.markdown("""
         **Top Predictors:**
         1. conf_B2 (Pedagogical Confidence - Classroom Management): β = 0.461
@@ -1043,7 +1043,7 @@ with tab5:
         5. digi_C2e (Digital Literacy - Collaboration): β = 0.257
         """)
     
-    with st.expander("🔬 Key Research Findings"):
+    with st.expander(" Key Research Findings"):
         st.markdown("""
         **Main Findings:**
         1. **Pedagogical Confidence** is the strongest predictor of readiness
@@ -1053,7 +1053,7 @@ with tab5:
         5. Linear relationships dominate (MLR R² = 0.9699)
         """)
     
-    with st.expander("📚 References"):
+    with st.expander(" References"):
         st.markdown("""
         - Mishra, P., & Koehler, M. J. (2006). Technological Pedagogical Content Knowledge: A framework for teacher knowledge.
         - Bandura, A. (1997). Self-efficacy: The exercise of control.
