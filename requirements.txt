@@ -1,0 +1,15 @@
+pandas>=1.5
+numpy>=1.23
+matplotlib
+seaborn
+scikit-learn>=1.2
+factor-analyzer
+semopy
+pingouin
+scipy
+statsmodels
+xgboost
+joblib
+requests
+streamlit>=1.28
+plotly
