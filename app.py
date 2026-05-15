@@ -247,7 +247,7 @@ def detect_mismatch(ped_mean, dig_mean, res_mean, train_mean):
     gap = ped_mean - skill_mean
     if gap > 1.2:
         return 'overconfident', (
-            " **Overconfident Profile Detected**\n\n"
+            "⚠️ **Overconfident Profile Detected**\n\n"
             "This teacher reports high Pedagogical Confidence "
             f"({ped_mean:.1f}/5) but lower Digital Literacy, Resource "
             f"Availability, and Training Quality (average {skill_mean:.1f}/5). "
@@ -257,7 +257,7 @@ def detect_mismatch(ped_mean, dig_mean, res_mean, train_mean):
         )
     elif gap < -1.2:
         return 'underconfident', (
-            " **Underconfident Profile Detected**\n\n"
+            "💡 **Underconfident Profile Detected**\n\n"
             "This teacher has solid Digital Literacy, Resource access, and "
             f"Training Quality (average {skill_mean:.1f}/5) but reports low "
             f"Pedagogical Confidence ({ped_mean:.1f}/5). This represents "
@@ -485,7 +485,7 @@ FEATURE_ORDER = [
 # ============================================================
 st.markdown("""
 <div class="main-header">
-    <h1 style="margin:0"> CBC Teacher Readiness Diagnostic</h1>
+    <h1 style="margin:0">🎓 CBC Teacher Readiness Diagnostic</h1>
     <p style="margin:0; opacity:0.9">
         Evidence-based decision support for Competency-Based Curriculum implementation
     </p>
@@ -521,7 +521,7 @@ with st.sidebar:
 
     st.markdown("---")
     st.markdown("###  Export Session")
-    if st.button("Export All Session Data", use_container_width=True):
+    if st.button("Export All Session Data", width='stretch'):
         if st.session_state.previous_predictions:
             export_df = pd.DataFrame(st.session_state.previous_predictions)
             st.markdown(
@@ -532,7 +532,7 @@ with st.sidebar:
             st.info("No data yet.")
 
     st.markdown("---")
-    st.markdown("###  Key Finding")
+    st.markdown("### 🔑 Key Finding")
     st.info(
         "Digital Literacy only improves TRI when Training Quality > 3.0. "
         "Prioritise training quality before digital upskilling."
@@ -684,7 +684,7 @@ with tab1:
         with bcol:
             run_btn = st.button(
                 "🔍 Generate Readiness Profile",
-                use_container_width=True, type="primary", key="gen_t1"
+                width='stretch', type="primary", key="gen_t1"
             )
 
     with right:
@@ -768,7 +768,7 @@ with tab1:
             "above (red) or below (blue) the county average of 11.46."
         )
         fig_shap = build_shap_waterfall(ped_m, dig_m, res_m, train_m, prediction)
-        st.plotly_chart(fig_shap, use_container_width=True)
+        st.plotly_chart(fig_shap, width='stretch')
 
         # --- Radar chart ---
         st.markdown("###  Construct Profile Radar")
@@ -790,12 +790,12 @@ with tab1:
             showlegend=True, height=380,
             title="Readiness Profile vs Moderate Threshold (3.0)"
         )
-        st.plotly_chart(fig_radar, use_container_width=True)
+        st.plotly_chart(fig_radar, width='stretch')
 
         # --- Mismatch Detection ---
         mismatch_type, mismatch_msg = detect_mismatch(ped_m, dig_m, res_m, train_m)
         if mismatch_type != 'aligned':
-            st.markdown("###  Mismatch Profile Alert")
+            st.markdown("### 🔍 Mismatch Profile Alert")
             st.markdown(
                 f'<div class="mismatch-alert">{mismatch_msg}</div>',
                 unsafe_allow_html=True
@@ -823,7 +823,7 @@ with tab1:
         if worst_score < 3:
             st.markdown(
                 f'<div class="warning-box">'
-                f'<strong> Critical Resource Gap Identified</strong><br>'
+                f'<strong>🏗️ Critical Resource Gap Identified</strong><br>'
                 f'<em>{worst_resource}</em> is your lowest-rated resource '
                 f'({worst_score}/5). Advocate with your principal or county '
                 f'officer to address this gap as a priority action.'
@@ -932,7 +932,7 @@ with tab2:
         tgt_train = st.slider("Target Training Quality",       1.0,5.0,3.5,0.5,key="sim_tt")
 
     # Cost-Benefit Estimator
-    st.markdown("###  Resource Allocation Estimator")
+    st.markdown("### 💰 Resource Allocation Estimator")
     st.caption(
         "Enter an approximate budget to estimate the highest-return intervention."
     )
@@ -988,7 +988,7 @@ with tab2:
             text=gain_df['Expected TRI Gain'].round(2)
         )
         fig.add_hline(y=0, line_color='grey', line_dash='dot')
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width='stretch')
 
         # Before/After grouped bar
         fig2 = go.Figure(data=[
@@ -1004,7 +1004,7 @@ with tab2:
         fig2.update_layout(
             barmode='group', title='Current vs Target Construct Scores', height=350
         )
-        st.plotly_chart(fig2, use_container_width=True)
+        st.plotly_chart(fig2, width='stretch')
 
         # Threshold check
         if cur_train < 3.0 and tgt_dig > cur_dig:
@@ -1043,7 +1043,7 @@ with tab2:
                                'Est. Cost (KSh)','Expected TRI Gain',
                                'TRI Gain per KSh 10k']
             roi_df = roi_df.sort_values('TRI Gain per KSh 10k', ascending=False)
-            st.dataframe(roi_df, use_container_width=True)
+            st.dataframe(roi_df, width='stretch')
 
             best = roi_df.iloc[0]
             total_cost = roi_df['Est. Cost (KSh)'].sum()
@@ -1179,7 +1179,7 @@ with tab3:
                     },
                     title='Readiness Band Distribution'
                 )
-                st.plotly_chart(fig, use_container_width=True)
+                st.plotly_chart(fig, width='stretch')
             with c2:
                 fig2 = px.bar(
                     band_counts, x='Band', y='Count', color='Band',
@@ -1188,7 +1188,7 @@ with tab3:
                     },
                     title='Teachers by Readiness Band'
                 )
-                st.plotly_chart(fig2, use_container_width=True)
+                st.plotly_chart(fig2, width='stretch')
 
             # Staff Heat Map (anonymised)
             st.markdown("###  Staff Readiness Heat Map (Anonymised)")
@@ -1202,7 +1202,7 @@ with tab3:
                 title='Construct Scores by Teacher (Anonymised)',
                 labels={'color':'Score (1–5)'}
             )
-            st.plotly_chart(fig_heat, use_container_width=True)
+            st.plotly_chart(fig_heat, width='stretch')
 
             # Department breakdown if available
             if 'subject' in sdf.columns:
@@ -1225,7 +1225,7 @@ with tab3:
                     title='Average Construct Scores by Department',
                     range_y=[1,5]
                 )
-                st.plotly_chart(fig_dept, use_container_width=True)
+                st.plotly_chart(fig_dept, width='stretch')
 
             # Peer Mentoring Suggestions
             st.markdown("###  Peer Mentoring Recommendations")
@@ -1243,7 +1243,7 @@ with tab3:
                              'Resource_Availability','Training_Quality']
                         ].idxmin()
                     })
-                st.dataframe(pd.DataFrame(pairs), use_container_width=True)
+                st.dataframe(pd.DataFrame(pairs), width='stretch')
             else:
                 st.info("Mentoring pairs require at least one High and one "
                         "Low readiness teacher in the cohort.")
@@ -1313,7 +1313,7 @@ with tab4:
 
     st.markdown(
         '<div class="policy-box">'
-        '<strong> Designed for: County Education Officers</strong><br>'
+        '<strong>👤 Designed for: County Education Officers</strong><br>'
         'Upload a combined CSV with data from multiple schools. '
         'Include a <em>school_name</em> or <em>school_id</em> column '
         'to enable school-level comparison.'
@@ -1415,9 +1415,9 @@ with tab4:
                 )
                 fig.add_hline(y=11.46, line_dash='dash', line_color='grey',
                               annotation_text='County Norm: 11.46')
-                st.plotly_chart(fig, use_container_width=True)
+                st.plotly_chart(fig, width='stretch')
 
-                st.dataframe(school_summary, use_container_width=True)
+                st.dataframe(school_summary, width='stretch')
 
             # Location comparison
             if 'location' in cdf.columns:
@@ -1441,7 +1441,7 @@ with tab4:
                 )
                 fig_loc.add_hline(y=3.0, line_dash='dot', line_color='red',
                                   annotation_text='Moderate Threshold')
-                st.plotly_chart(fig_loc, use_container_width=True)
+                st.plotly_chart(fig_loc, width='stretch')
 
             # PD Gap Analysis
             st.markdown("###  Professional Development Gap Analysis")
@@ -1461,7 +1461,7 @@ with tab4:
                       '(higher bar = greater need)',
                 text=gap_df['Gap to Threshold (3.0)'].round(2)
             )
-            st.plotly_chart(fig_gap, use_container_width=True)
+            st.plotly_chart(fig_gap, width='stretch')
 
             # Resource Allocation Priority
             st.markdown("###  Resource Allocation Priority Ranking")
@@ -1475,7 +1475,7 @@ with tab4:
                 priority['Recommendation'] = priority['Mean_TRI'].apply(
                     lambda s: '🔴 Urgent Support Needed' if s < 9
                     else ('🟡 Targeted Support' if s < 12 else '🟢 Maintenance'))
-                st.dataframe(priority.round(2), use_container_width=True)
+                st.dataframe(priority.round(2), width='stretch')
 
             # Training Quality Coverage
             if 'training_attended' in cdf.columns:
@@ -1551,7 +1551,7 @@ with tab5:
         'Moderate Band': ['2.5–3.5','2.0–3.5','2.0–3.5','1.5–3.5','10.0–14.9'],
         'High Band': ['> 3.5','> 3.5','> 3.5','> 3.5','≥ 15.0'],
     })
-    st.dataframe(bench_df, use_container_width=True)
+    st.dataframe(bench_df, width='stretch')
 
     st.markdown("---")
 
@@ -1663,7 +1663,7 @@ with tab5:
     )
 
     # Reform Risk Dashboard
-    st.markdown("###  Reform Risk Indicators")
+    st.markdown("### ⚠️ Reform Risk Indicators")
     c1, c2 = st.columns(2)
     with c1:
         st.markdown(
@@ -1714,7 +1714,7 @@ with tab5:
         'Urban-Rural Gap': [0.01, 0.82, 0.01, 0.00],
         'Equity Concern': ['None','High','Minimal','None']
     })
-    st.dataframe(equity_data, use_container_width=True)
+    st.dataframe(equity_data, width='stretch')
 
     fig_equity = px.bar(
         equity_data.melt(id_vars='Construct',
@@ -1732,7 +1732,7 @@ with tab5:
     )
     fig_equity.add_hline(y=3.0, line_dash='dash', line_color='red',
                          annotation_text='Moderate Threshold (3.0)')
-    st.plotly_chart(fig_equity, use_container_width=True)
+    st.plotly_chart(fig_equity, width='stretch')
 
     # Training Attendance vs Quality Policy
     st.markdown("###  Training Quality vs Attendance Policy Finding")
@@ -1761,10 +1761,10 @@ with tab5:
                    'train_E6: Follow-up Support',
                    'train_E7: Confidence Improvement'],
         'MLR Coefficient (β)': [0.033, 0.167, 0.164, 0.161, 0.207, 0.141, 0.157],
-        'p-value': [0.364, '<0.001','<0.001','<0.001','<0.001','<0.001','<0.001'],
+        'p-value': ['0.364', '<0.001','<0.001','<0.001','<0.001','<0.001','<0.001'],
         'Significant': ['No','Yes','Yes','Yes','Yes','Yes','Yes']
     })
-    st.dataframe(att_qual_df, use_container_width=True)
+    st.dataframe(att_qual_df, width='stretch')
 
     # SDG 4 Alignment
     st.markdown("###  SDG 4 Alignment Tracker")
@@ -1794,7 +1794,7 @@ with tab5:
             'Proportion of teachers with TRI ≥ 11.46 (county norm)'
         ]
     })
-    st.dataframe(sdg_df, use_container_width=True)
+    st.dataframe(sdg_df, width='stretch')
 
 # ============================================================
 # TAB 6 — COHORT ANALYSIS
@@ -1877,7 +1877,7 @@ with tab6:
                           annotation_text=f"Mean: {hdf['TRI'].mean():.2f}")
             fig.add_vline(x=11.46, line_dash='dot', line_color='grey',
                           annotation_text="County Norm: 11.46")
-            st.plotly_chart(fig, use_container_width=True)
+            st.plotly_chart(fig, width='stretch')
 
             # Band distribution
             c1, c2 = st.columns(2)
@@ -1892,7 +1892,7 @@ with tab6:
                     },
                     title='Readiness Band Distribution'
                 )
-                st.plotly_chart(fig, use_container_width=True)
+                st.plotly_chart(fig, width='stretch')
             with c2:
                 fig2 = px.bar(
                     band_c, x='Band', y='Count', color='Band',
@@ -1901,10 +1901,10 @@ with tab6:
                     },
                     title='Teachers by Band'
                 )
-                st.plotly_chart(fig2, use_container_width=True)
+                st.plotly_chart(fig2, width='stretch')
 
             # Construct averages
-            st.markdown("###  Construct-Level Analysis")
+            st.markdown("### 🔧 Construct-Level Analysis")
             cons_df = pd.DataFrame({
                 'Construct': ['Pedagogical Confidence','Digital Literacy',
                               'Resource Availability','Training Quality'],
@@ -1923,10 +1923,10 @@ with tab6:
             )
             fig_c.add_hline(y=3.0, line_dash='dash', line_color='red',
                             annotation_text='Moderate Threshold (3.0)')
-            st.plotly_chart(fig_c, use_container_width=True)
+            st.plotly_chart(fig_c, width='stretch')
 
             # Resource Deficit Analysis
-            st.markdown("###  Resource Deficit Analysis")
+            st.markdown("### 🏗️ Resource Deficit Analysis")
             res_cols = [c for c in hdf.columns if c.startswith('res_D')]
             if res_cols:
                 res_names = {
@@ -1951,7 +1951,7 @@ with tab6:
                 )
                 fig_res.add_hline(y=3.0, line_dash='dash', line_color='red',
                                   annotation_text='Moderate Threshold')
-                st.plotly_chart(fig_res, use_container_width=True)
+                st.plotly_chart(fig_res, width='stretch')
 
                 # Infrastructure Priority Ranker
                 st.markdown("#### 🏆 Infrastructure Priority Ranker")
@@ -1963,10 +1963,10 @@ with tab6:
                 res_df['Action'] = res_df['Mean Score'].apply(
                     lambda s: '🔴 Urgent' if s < 2
                     else ('🟡 Important' if s < 3 else '🟢 Maintain'))
-                st.dataframe(res_df.round(2), use_container_width=True)
+                st.dataframe(res_df.round(2), width='stretch')
 
             # Export
-            st.markdown("###  Export Cohort Analysis")
+            st.markdown("### 📥 Export Cohort Analysis")
             export_h = hdf[['Pedagogical_Confidence','Digital_Literacy',
                              'Resource_Availability','Training_Quality',
                              'TRI','Readiness_Band']]
@@ -1993,7 +1993,7 @@ with tab7:
         hist_df = pd.DataFrame(st.session_state.previous_predictions)
 
         st.markdown("### Assessment History")
-        st.dataframe(hist_df, use_container_width=True)
+        st.dataframe(hist_df, width='stretch')
 
         # Trend chart
         fig = go.Figure()
@@ -2019,7 +2019,7 @@ with tab7:
             yaxis_range=[4, 20],
             height=400
         )
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width='stretch')
 
         # Construct trends if available
         if all(c in hist_df.columns for c in
@@ -2046,7 +2046,7 @@ with tab7:
                 yaxis_title='Score (1–5)',
                 yaxis_range=[1,5], height=380
             )
-            st.plotly_chart(fig2, use_container_width=True)
+            st.plotly_chart(fig2, width='stretch')
 
         # Summary stats
         st.markdown("### Summary Statistics")
@@ -2104,7 +2104,7 @@ with tab8:
             title='Stacking Ensemble Meta-Learner Weights',
             color_discrete_sequence=['#9b59b6','#e67e22','#2ecc71','#3498db']
         )
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width='stretch')
 
     with st.expander(" Feature Importance (MLR Coefficients)"):
         coef_df = pd.DataFrame({
@@ -2126,8 +2126,8 @@ with tab8:
             color_continuous_scale='Blues',
             title='Top 10 MLR Predictors by Coefficient Magnitude'
         )
-        st.plotly_chart(fig, use_container_width=True)
-        st.dataframe(coef_df, use_container_width=True)
+        st.plotly_chart(fig, width='stretch')
+        st.dataframe(coef_df, width='stretch')
 
     with st.expander(" Psychometric Validation"):
         st.markdown("""
@@ -2151,7 +2151,7 @@ with tab8:
             "McDonald's ω": [0.962, 0.953, 0.947, 0.976],
             'Avg Inter-Item r': [0.781, 0.692, 0.750, 0.869]
         })
-        st.dataframe(rel_df, use_container_width=True)
+        st.dataframe(rel_df, width='stretch')
 
         st.markdown("""
         **Measurement Invariance:**
