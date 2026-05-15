@@ -521,7 +521,7 @@ with st.sidebar:
 
     st.markdown("---")
     st.markdown("### 📥 Export Session")
-    if st.button("Export All Session Data", width='stretch'):
+    if st.button("Export All Session Data", use_container_width=True):
         if st.session_state.previous_predictions:
             export_df = pd.DataFrame(st.session_state.previous_predictions)
             st.markdown(
@@ -768,7 +768,7 @@ with tab1:
             "above (red) or below (blue) the county average of 11.46."
         )
         fig_shap = build_shap_waterfall(ped_m, dig_m, res_m, train_m, prediction)
-        st.plotly_chart(fig_shap, width='stretch')
+        st.plotly_chart(fig_shap, use_container_width=True)
 
         # --- Radar chart ---
         st.markdown("### 🕸️ Construct Profile Radar")
@@ -790,7 +790,7 @@ with tab1:
             showlegend=True, height=380,
             title="Readiness Profile vs Moderate Threshold (3.0)"
         )
-        st.plotly_chart(fig_radar, width='stretch')
+        st.plotly_chart(fig_radar, use_container_width=True)
 
         # --- Mismatch Detection ---
         mismatch_type, mismatch_msg = detect_mismatch(ped_m, dig_m, res_m, train_m)
@@ -988,7 +988,7 @@ with tab2:
             text=gain_df['Expected TRI Gain'].round(2)
         )
         fig.add_hline(y=0, line_color='grey', line_dash='dot')
-        st.plotly_chart(fig, width='stretch')
+        st.plotly_chart(fig, use_container_width=True)
 
         # Before/After grouped bar
         fig2 = go.Figure(data=[
@@ -1004,7 +1004,7 @@ with tab2:
         fig2.update_layout(
             barmode='group', title='Current vs Target Construct Scores', height=350
         )
-        st.plotly_chart(fig2, width='stretch')
+        st.plotly_chart(fig2, use_container_width=True)
 
         # Threshold check
         if cur_train < 3.0 and tgt_dig > cur_dig:
@@ -1179,7 +1179,7 @@ with tab3:
                     },
                     title='Readiness Band Distribution'
                 )
-                st.plotly_chart(fig, width='stretch')
+                st.plotly_chart(fig, use_container_width=True)
             with c2:
                 fig2 = px.bar(
                     band_counts, x='Band', y='Count', color='Band',
@@ -1188,7 +1188,7 @@ with tab3:
                     },
                     title='Teachers by Readiness Band'
                 )
-                st.plotly_chart(fig2, width='stretch')
+                st.plotly_chart(fig2, use_container_width=True)
 
             # Staff Heat Map (anonymised)
             st.markdown("### 🌡️ Staff Readiness Heat Map (Anonymised)")
@@ -1202,7 +1202,7 @@ with tab3:
                 title='Construct Scores by Teacher (Anonymised)',
                 labels={'color':'Score (1–5)'}
             )
-            st.plotly_chart(fig_heat, width='stretch')
+            st.plotly_chart(fig_heat, use_container_width=True)
 
             # Department breakdown if available
             if 'subject' in sdf.columns:
@@ -1225,7 +1225,7 @@ with tab3:
                     title='Average Construct Scores by Department',
                     range_y=[1,5]
                 )
-                st.plotly_chart(fig_dept, width='stretch')
+                st.plotly_chart(fig_dept, use_container_width=True)
 
             # Peer Mentoring Suggestions
             st.markdown("### 🤝 Peer Mentoring Recommendations")
@@ -1415,7 +1415,7 @@ with tab4:
                 )
                 fig.add_hline(y=11.46, line_dash='dash', line_color='grey',
                               annotation_text='County Norm: 11.46')
-                st.plotly_chart(fig, width='stretch')
+                st.plotly_chart(fig, use_container_width=True)
 
                 st.dataframe(school_summary, width='stretch')
 
@@ -1441,7 +1441,7 @@ with tab4:
                 )
                 fig_loc.add_hline(y=3.0, line_dash='dot', line_color='red',
                                   annotation_text='Moderate Threshold')
-                st.plotly_chart(fig_loc, width='stretch')
+                st.plotly_chart(fig_loc, use_container_width=True)
 
             # PD Gap Analysis
             st.markdown("### 📚 Professional Development Gap Analysis")
@@ -1461,7 +1461,7 @@ with tab4:
                       '(higher bar = greater need)',
                 text=gap_df['Gap to Threshold (3.0)'].round(2)
             )
-            st.plotly_chart(fig_gap, width='stretch')
+            st.plotly_chart(fig_gap, use_container_width=True)
 
             # Resource Allocation Priority
             st.markdown("### 💰 Resource Allocation Priority Ranking")
@@ -1732,7 +1732,7 @@ with tab5:
     )
     fig_equity.add_hline(y=3.0, line_dash='dash', line_color='red',
                          annotation_text='Moderate Threshold (3.0)')
-    st.plotly_chart(fig_equity, width='stretch')
+    st.plotly_chart(fig_equity, use_container_width=True)
 
     # Training Attendance vs Quality Policy
     st.markdown("### 📊 Training Quality vs Attendance Policy Finding")
@@ -1880,7 +1880,7 @@ with tab6:
                           annotation_text=f"Mean: {hdf['TRI'].mean():.2f}")
             fig.add_vline(x=11.46, line_dash='dot', line_color='grey',
                           annotation_text="County Norm: 11.46")
-            st.plotly_chart(fig, width='stretch')
+            st.plotly_chart(fig, use_container_width=True)
 
             # Band distribution
             c1, c2 = st.columns(2)
@@ -1895,7 +1895,7 @@ with tab6:
                     },
                     title='Readiness Band Distribution'
                 )
-                st.plotly_chart(fig, width='stretch')
+                st.plotly_chart(fig, use_container_width=True)
             with c2:
                 fig2 = px.bar(
                     band_c, x='Band', y='Count', color='Band',
@@ -1904,7 +1904,7 @@ with tab6:
                     },
                     title='Teachers by Band'
                 )
-                st.plotly_chart(fig2, width='stretch')
+                st.plotly_chart(fig2, use_container_width=True)
 
             # Construct averages
             st.markdown("### 🔧 Construct-Level Analysis")
@@ -1926,7 +1926,7 @@ with tab6:
             )
             fig_c.add_hline(y=3.0, line_dash='dash', line_color='red',
                             annotation_text='Moderate Threshold (3.0)')
-            st.plotly_chart(fig_c, width='stretch')
+            st.plotly_chart(fig_c, use_container_width=True)
 
             # Resource Deficit Analysis
             st.markdown("### 🏗️ Resource Deficit Analysis")
@@ -1954,7 +1954,7 @@ with tab6:
                 )
                 fig_res.add_hline(y=3.0, line_dash='dash', line_color='red',
                                   annotation_text='Moderate Threshold')
-                st.plotly_chart(fig_res, width='stretch')
+                st.plotly_chart(fig_res, use_container_width=True)
 
                 # Infrastructure Priority Ranker
                 st.markdown("#### 🏆 Infrastructure Priority Ranker")
@@ -2022,7 +2022,7 @@ with tab7:
             yaxis_range=[4, 20],
             height=400
         )
-        st.plotly_chart(fig, width='stretch')
+        st.plotly_chart(fig, use_container_width=True)
 
         # Construct trends if available
         if all(c in hist_df.columns for c in
@@ -2049,7 +2049,7 @@ with tab7:
                 yaxis_title='Score (1–5)',
                 yaxis_range=[1,5], height=380
             )
-            st.plotly_chart(fig2, width='stretch')
+            st.plotly_chart(fig2, use_container_width=True)
 
         # Summary stats
         st.markdown("### Summary Statistics")
@@ -2107,7 +2107,7 @@ with tab8:
             title='Stacking Ensemble Meta-Learner Weights',
             color_discrete_sequence=['#9b59b6','#e67e22','#2ecc71','#3498db']
         )
-        st.plotly_chart(fig, width='stretch')
+        st.plotly_chart(fig, use_container_width=True)
 
     with st.expander("🔑 Feature Importance (MLR Coefficients)"):
         coef_df = pd.DataFrame({
@@ -2123,13 +2123,13 @@ with tab8:
         })
         fig = px.bar(
             coef_df.head(10),
-            x='Coefficient (β)', y='Feature',
+            x='Coefficient', y='Feature',
             orientation='h',
-            color='Coefficient (β)',
+            color='Coefficient',
             color_continuous_scale='Blues',
             title='Top 10 MLR Predictors by Coefficient Magnitude'
         )
-        st.plotly_chart(fig, width='stretch')
+        st.plotly_chart(fig, use_container_width=True)
         st.dataframe(coef_df, width='stretch')
 
     with st.expander("📐 Psychometric Validation"):
