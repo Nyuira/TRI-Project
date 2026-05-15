@@ -501,7 +501,7 @@ st.markdown("""
 # SIDEBAR
 # ============================================================
 with st.sidebar:
-    st.markdown("###  User Role")
+    st.markdown("### 👤 User Role")
     role = st.selectbox(
         "I am a:",
         ["Individual Teacher", "School Principal",
@@ -510,7 +510,7 @@ with st.sidebar:
     )
 
     st.markdown("---")
-    st.markdown("###  Session Stats")
+    st.markdown("### 📊 Session Stats")
     c1, c2 = st.columns(2)
     with c1:
         st.metric("Diagnostics Run", st.session_state.predictions_made)
@@ -520,7 +520,7 @@ with st.sidebar:
             st.metric("Avg TRI", f"{avg:.1f}")
 
     st.markdown("---")
-    st.markdown("###  Export Session")
+    st.markdown("### 📥 Export Session")
     if st.button("Export All Session Data", width='stretch'):
         if st.session_state.previous_predictions:
             export_df = pd.DataFrame(st.session_state.previous_predictions)
@@ -546,21 +546,21 @@ with st.sidebar:
 # ============================================================
 (tab1, tab2, tab3, tab4, tab5,
  tab6, tab7, tab8) = st.tabs([
-    " Individual Assessment",
-    " Intervention Simulator",
-    " School Dashboard",
-    " County Dashboard",
-    " Policy Intelligence",
-    " Cohort Analysis",
-    " Progress Tracking",
-    " Technical Docs"
+    "👩‍🏫 Individual Assessment",
+    "🔬 Intervention Simulator",
+    "🏫 School Dashboard",
+    "🏛️ County Dashboard",
+    "📋 Policy Intelligence",
+    "📊 Cohort Analysis",
+    "📈 Progress Tracking",
+    "⚙️ Technical Docs"
 ])
 
 # ============================================================
 # TAB 1 — INDIVIDUAL ASSESSMENT
 # ============================================================
 with tab1:
-    st.markdown("##  Individual Teacher Readiness Assessment")
+    st.markdown("## 👩‍🏫 Individual Teacher Readiness Assessment")
     st.markdown(
         "Complete all four sections below to generate a personalised "
         "readiness profile, SHAP diagnostic chart, mismatch detection, "
@@ -572,7 +572,7 @@ with tab1:
 
     with left:
         # --- Section 1: Pedagogical Confidence ---
-        with st.expander(" Section 1: Pedagogical Confidence", expanded=True):
+        with st.expander("🧠 Section 1: Pedagogical Confidence", expanded=True):
             st.caption("How confident are you in these areas of CBC delivery?")
             c1, c2 = st.columns(2)
             label_15 = lambda x: ["Very Low","Low","Moderate","High","Very High"][x-1]
@@ -591,7 +591,7 @@ with tab1:
             sections_done += 1
 
         # --- Section 2: Digital Literacy ---
-        with st.expander(" Section 2: Digital Literacy", expanded=True):
+        with st.expander("💻 Section 2: Digital Literacy", expanded=True):
             st.caption("Rate your digital teaching capabilities.")
             c1, c2, c3 = st.columns(3)
             with c1:
@@ -615,7 +615,7 @@ with tab1:
             sections_done += 1
 
         # --- Section 3: Resource Availability ---
-        with st.expander(" Section 3: Resource Availability", expanded=True):
+        with st.expander("🏗️ Section 3: Resource Availability", expanded=True):
             st.caption("Assess your school's CBC resources.")
             r_labels = {
                 'res_D1': ("ICT Infrastructure",
@@ -649,7 +649,7 @@ with tab1:
             res_D4,res_D5,res_D6 = r_vals['res_D4'],r_vals['res_D5'],r_vals['res_D6']
 
         # --- Section 4: Training Quality ---
-        with st.expander(" Section 4: Training Quality", expanded=True):
+        with st.expander("📚 Section 4: Training Quality", expanded=True):
             st.caption("Evaluate the quality of your CBC professional development.")
             train_attended = st.checkbox(
                 "I have attended CBC professional development training",
@@ -694,7 +694,7 @@ with tab1:
         if sections_done == 4:
             st.success("Ready for analysis.")
         st.markdown("---")
-        st.markdown("###  Tips")
+        st.markdown("### 📌 Tips")
         st.info("Answer based on your current situation, not aspirational targets. "
                 "Honest responses produce the most useful diagnostic output.")
 
@@ -745,7 +745,7 @@ with tab1:
         pct = get_percentile(prediction)
 
         st.markdown("---")
-        st.markdown("##  Readiness Assessment Results")
+        st.markdown("## 📊 Readiness Assessment Results")
 
         # Key metrics row
         m1, m2, m3, m4 = st.columns(4)
@@ -762,7 +762,7 @@ with tab1:
                       f"{prediction - 11.46:.1f} pts")
 
         # --- SHAP Waterfall ---
-        st.markdown("###  SHAP Diagnostic Waterfall")
+        st.markdown("### 📉 SHAP Diagnostic Waterfall")
         st.caption(
             "Each bar shows how much a construct pushed your TRI score "
             "above (red) or below (blue) the county average of 11.46."
@@ -771,7 +771,7 @@ with tab1:
         st.plotly_chart(fig_shap, width='stretch')
 
         # --- Radar chart ---
-        st.markdown("###  Construct Profile Radar")
+        st.markdown("### 🕸️ Construct Profile Radar")
         fig_radar = go.Figure()
         cats = ['Pedagogical\nConfidence','Digital\nLiteracy',
                 'Resource\nAvailability','Training\nQuality']
@@ -832,7 +832,7 @@ with tab1:
             )
 
         # --- Tiered Roadmap ---
-        st.markdown("###  Personalised Development Roadmap")
+        st.markdown("### 🗺️ Personalised Development Roadmap")
         roadmap = generate_tiered_roadmap(ped_m, dig_m, res_m, train_m, band)
 
         if roadmap['threshold_warning']:
@@ -840,7 +840,7 @@ with tab1:
 
         col_3m, col_6m, col_12m = st.columns(3)
         with col_3m:
-            st.markdown("####  0–3 Months")
+            st.markdown("#### 📅 0–3 Months")
             st.markdown("*Priority interventions:*")
             for action in roadmap['3_month']:
                 st.markdown(
@@ -848,7 +848,7 @@ with tab1:
                     unsafe_allow_html=True
                 )
         with col_6m:
-            st.markdown("####  3–6 Months")
+            st.markdown("#### 📅 3–6 Months")
             st.markdown("*Skill consolidation:*")
             for action in roadmap['6_month']:
                 st.markdown(
@@ -856,7 +856,7 @@ with tab1:
                     unsafe_allow_html=True
                 )
         with col_12m:
-            st.markdown("####  6–12 Months")
+            st.markdown("#### 📅 6–12 Months")
             st.markdown("*Leadership and embedding:*")
             for action in roadmap['12_month']:
                 st.markdown(
@@ -865,7 +865,7 @@ with tab1:
                 )
 
         # --- Export Personal Development Plan ---
-        st.markdown("###  Download Personal Development Plan")
+        st.markdown("### 📥 Download Personal Development Plan")
         plan_data = {
             'Field': [
                 'TRI Score', 'Readiness Band', 'Approx. Percentile',
@@ -899,7 +899,7 @@ with tab1:
 # TAB 2 — INTERVENTION SIMULATOR
 # ============================================================
 with tab2:
-    st.markdown("##  Intervention Impact Simulator")
+    st.markdown("## 🔬 Intervention Impact Simulator")
     st.markdown(
         "Adjust target scores to model the expected TRI impact "
         "of specific professional development interventions. "
@@ -908,7 +908,7 @@ with tab2:
 
     st.markdown(
         '<div class="policy-box">'
-        '<strong> Research-Based Sequencing Guidance</strong><br>'
+        '<strong>📋 Research-Based Sequencing Guidance</strong><br>'
         'Evidence from this study shows that Digital Literacy improvements '
         'yield minimal TRI gains when Training Quality is below 3.0. '
         'The simulator will flag this condition automatically.'
@@ -1019,7 +1019,7 @@ with tab2:
             )
 
         # Cost-Benefit Recommendation
-        st.markdown("###  Budget Allocation Recommendation")
+        st.markdown("### 💡 Budget Allocation Recommendation")
         improvements = {
             'Pedagogical Confidence': tgt_ped   - cur_ped,
             'Digital Literacy':       tgt_dig   - cur_dig,
@@ -1065,7 +1065,7 @@ with tab2:
 # TAB 3 — SCHOOL DASHBOARD (PRINCIPAL)
 # ============================================================
 with tab3:
-    st.markdown("##  School Dashboard — Principal View")
+    st.markdown("## 🏫 School Dashboard — Principal View")
     st.markdown(
         "Upload your school's teacher survey responses to generate "
         "a school-level readiness report, identify at-risk teachers, "
@@ -1083,7 +1083,7 @@ with tab3:
     )
 
     # Template download
-    with st.expander(" Download School Template"):
+    with st.expander("📋 Download School Template"):
         school_template = pd.DataFrame({
             'teacher_id': [f'T{i:03d}' for i in range(1, 6)],
             'subject': ['Mathematics','English','Science','History','Arts'],
@@ -1150,7 +1150,7 @@ with tab3:
             sdf['Profile_Type'] = sdf.apply(row_mismatch, axis=1)
 
             # School summary
-            st.markdown("###  School Readiness Summary")
+            st.markdown("### 📊 School Readiness Summary")
             m1,m2,m3,m4 = st.columns(4)
             with m1:
                 st.metric("School Mean TRI", f"{sdf['TRI'].mean():.2f}")
@@ -1166,7 +1166,7 @@ with tab3:
                 st.metric("Below Training Threshold", below_thresh)
 
             # Band distribution
-            st.markdown("###  Readiness Band Distribution")
+            st.markdown("### 🎯 Readiness Band Distribution")
             c1, c2 = st.columns(2)
             band_counts = sdf['Readiness_Band'].value_counts().reset_index()
             band_counts.columns = ['Band','Count']
@@ -1191,7 +1191,7 @@ with tab3:
                 st.plotly_chart(fig2, width='stretch')
 
             # Staff Heat Map (anonymised)
-            st.markdown("###  Staff Readiness Heat Map (Anonymised)")
+            st.markdown("### 🌡️ Staff Readiness Heat Map (Anonymised)")
             heat_df = sdf[['Pedagogical_Confidence','Digital_Literacy',
                            'Resource_Availability','Training_Quality']].copy()
             heat_df.index = [f'Teacher {i+1}' for i in range(len(heat_df))]
@@ -1206,7 +1206,7 @@ with tab3:
 
             # Department breakdown if available
             if 'subject' in sdf.columns:
-                st.markdown("###  Readiness by Subject / Department")
+                st.markdown("### 📚 Readiness by Subject / Department")
                 dept_df = sdf.groupby('subject')[
                     ['Pedagogical_Confidence','Digital_Literacy',
                      'Resource_Availability','Training_Quality','TRI']
@@ -1228,7 +1228,7 @@ with tab3:
                 st.plotly_chart(fig_dept, width='stretch')
 
             # Peer Mentoring Suggestions
-            st.markdown("###  Peer Mentoring Recommendations")
+            st.markdown("### 🤝 Peer Mentoring Recommendations")
             high_teachers = sdf[sdf['Readiness_Band']=='High'].index.tolist()
             low_teachers  = sdf[sdf['Readiness_Band']=='Low'].index.tolist()
             if high_teachers and low_teachers:
@@ -1249,7 +1249,7 @@ with tab3:
                         "Low readiness teacher in the cohort.")
 
             # School Action Plan
-            st.markdown("###  Auto-Generated School Action Plan")
+            st.markdown("### 📋 Auto-Generated School Action Plan")
             weakest_construct = sdf[
                 ['Pedagogical_Confidence','Digital_Literacy',
                  'Resource_Availability','Training_Quality']
@@ -1279,14 +1279,14 @@ with tab3:
 
             st.markdown(
                 f'<div class="recommendation-box">'
-                f'<strong> School Priority: {weakest_construct}</strong><br><br>'
+                f'<strong>🏆 School Priority: {weakest_construct}</strong><br><br>'
                 f'{action_map.get(weakest_construct, "Contact your county education officer for guidance.")}'
                 f'</div>',
                 unsafe_allow_html=True
             )
 
             # Export
-            st.markdown("###  Export School Report")
+            st.markdown("### 📥 Export School Report")
             export_df = sdf[['Pedagogical_Confidence','Digital_Literacy',
                               'Resource_Availability','Training_Quality',
                               'TRI','Readiness_Band','Profile_Type']].copy()
@@ -1304,7 +1304,7 @@ with tab3:
 # TAB 4 — COUNTY DASHBOARD
 # ============================================================
 with tab4:
-    st.markdown("##  County Dashboard — County Education Officer View")
+    st.markdown("## 🏛️ County Dashboard — County Education Officer View")
     st.markdown(
         "Upload multi-school data to compare readiness across schools, "
         "identify county-wide resource gaps, and generate a professional "
@@ -1321,7 +1321,7 @@ with tab4:
         unsafe_allow_html=True
     )
 
-    with st.expander(" Download County Template"):
+    with st.expander("📋 Download County Template"):
         county_template = pd.DataFrame({
             'school_id': ['SCH001']*3 + ['SCH002']*3,
             'school_type': ['Public County']*3 + ['Private']*3,
@@ -1376,7 +1376,7 @@ with tab4:
             )
 
             # County summary metrics
-            st.markdown("###  County Readiness Summary")
+            st.markdown("### 📊 County Readiness Summary")
             m1,m2,m3,m4 = st.columns(4)
             with m1:
                 st.metric("County Mean TRI", f"{cdf['TRI'].mean():.2f}")
@@ -1392,7 +1392,7 @@ with tab4:
 
             # Multi-school comparison
             if 'school_id' in cdf.columns:
-                st.markdown("###  School-Level Comparison")
+                st.markdown("### 🏫 School-Level Comparison")
                 school_summary = cdf.groupby('school_id').agg(
                     Mean_TRI=('TRI','mean'),
                     N_Teachers=('TRI','count'),
@@ -1421,7 +1421,7 @@ with tab4:
 
             # Location comparison
             if 'location' in cdf.columns:
-                st.markdown("###  Readiness by Location")
+                st.markdown("### 🌍 Readiness by Location")
                 loc_df = cdf.groupby('location')[
                     ['Pedagogical_Confidence','Digital_Literacy',
                      'Resource_Availability','Training_Quality','TRI']
@@ -1444,7 +1444,7 @@ with tab4:
                 st.plotly_chart(fig_loc, width='stretch')
 
             # PD Gap Analysis
-            st.markdown("###  Professional Development Gap Analysis")
+            st.markdown("### 📚 Professional Development Gap Analysis")
             construct_means = cdf[['Pedagogical_Confidence','Digital_Literacy',
                                    'Resource_Availability','Training_Quality']].mean()
             gap_df = pd.DataFrame({
@@ -1464,7 +1464,7 @@ with tab4:
             st.plotly_chart(fig_gap, width='stretch')
 
             # Resource Allocation Priority
-            st.markdown("###  Resource Allocation Priority Ranking")
+            st.markdown("### 💰 Resource Allocation Priority Ranking")
             if 'school_id' in cdf.columns:
                 priority = cdf.groupby('school_id').agg(
                     Mean_TRI=('TRI','mean'),
@@ -1479,7 +1479,7 @@ with tab4:
 
             # Training Quality Coverage
             if 'training_attended' in cdf.columns:
-                st.markdown("###  Training Coverage vs Quality")
+                st.markdown("### 📋 Training Coverage vs Quality")
                 att_rate = cdf['training_attended'].mean() * 100
                 quality_among_attended = cdf[cdf['training_attended']==1]['Training_Quality'].mean()
                 c1, c2, c3 = st.columns(3)
@@ -1497,7 +1497,7 @@ with tab4:
                               help="Teachers who attended but rated quality below 3.0")
 
             # County Report Export
-            st.markdown("###  Download County Report")
+            st.markdown("### 📥 Download County Report")
             county_report = cdf[
                 ['Pedagogical_Confidence','Digital_Literacy',
                  'Resource_Availability','Training_Quality',
@@ -1518,7 +1518,7 @@ with tab4:
 # TAB 5 — POLICY INTELLIGENCE
 # ============================================================
 with tab5:
-    st.markdown("##  Policy Intelligence — Ministry of Education View")
+    st.markdown("## 📋 Policy Intelligence — Ministry of Education View")
     st.markdown(
         "Strategic readiness intelligence to support evidence-based policy "
         "for Kenya's 2026 senior secondary CBC rollout."
@@ -1536,7 +1536,7 @@ with tab5:
     )
 
     # Reference Benchmarks
-    st.markdown("###  National Reference Benchmarks (Nakuru County Norms)")
+    st.markdown("### 📐 National Reference Benchmarks (Nakuru County Norms)")
     st.caption(
         "These norms are derived from 1,200 teachers across 240 secondary "
         "schools in Nakuru County (January 2025). Use these as reference "
@@ -1544,19 +1544,19 @@ with tab5:
     )
     bench_df = pd.DataFrame({
         'Construct': ['Pedagogical Confidence','Digital Literacy',
-                      'Resource Availability','Training Quality','TRI (4–20 scale)'],
-        'County Mean': [3.19, 2.66, 2.85, 2.76, 11.46],
-        'Std Deviation': [0.88, 0.77, 0.87, 1.20, 1.85],
-        'Low Band Threshold': ['< 2.5','< 2.0','< 2.0','< 1.5','< 10.0'],
-        'Moderate Band': ['2.5–3.5','2.0–3.5','2.0–3.5','1.5–3.5','10.0–14.9'],
-        'High Band': ['> 3.5','> 3.5','> 3.5','> 3.5','≥ 15.0'],
+                      'Resource Availability','Training Quality','TRI (4-20 scale)'],
+        'County Mean': ['3.19', '2.66', '2.85', '2.76', '11.46'],
+        'Std Deviation': ['0.88', '0.77', '0.87', '1.20', '1.85'],
+        'Low Band Threshold': ['under 2.5','under 2.0','under 2.0','under 1.5','under 10.0'],
+        'Moderate Band': ['2.5 to 3.5','2.0 to 3.5','2.0 to 3.5','1.5 to 3.5','10.0 to 14.9'],
+        'High Band': ['above 3.5','above 3.5','above 3.5','above 3.5','15.0 or above'],
     })
     st.dataframe(bench_df, width='stretch')
 
     st.markdown("---")
 
     # 2026 Rollout Readiness — Upload Section
-    st.markdown("###  2026 Senior Secondary CBC Rollout Readiness Indicator")
+    st.markdown("### 🚦 2026 Senior Secondary CBC Rollout Readiness Indicator")
     st.caption(
         "Upload county or school-level data to generate a traffic-light "
         "readiness indicator for the 2026 senior secondary rollout."
@@ -1640,7 +1640,7 @@ with tab5:
             st.error(f"Error: {e}")
 
     # Policy Sequencing Recommendation — always visible
-    st.markdown("###  Evidence-Based Policy Sequencing Recommendation")
+    st.markdown("### 📐 Evidence-Based Policy Sequencing Recommendation")
     st.markdown(
         '<div class="recommendation-box">'
         '<strong>Research Finding — Digital Literacy × Training Quality Threshold</strong><br><br>'
@@ -1691,7 +1691,7 @@ with tab5:
         )
 
     # Equity Monitor
-    st.markdown("###  Equity Monitor")
+    st.markdown("### ⚖️ Equity Monitor")
     st.markdown(
         '<div class="policy-box">'
         '<strong>Urban-Rural Digital Equity Gap (Nakuru County Reference)</strong><br><br>'
@@ -1735,7 +1735,7 @@ with tab5:
     st.plotly_chart(fig_equity, width='stretch')
 
     # Training Attendance vs Quality Policy
-    st.markdown("###  Training Quality vs Attendance Policy Finding")
+    st.markdown("### 📊 Training Quality vs Attendance Policy Finding")
     st.markdown(
         '<div class="recommendation-box">'
         '<strong>Empirical Finding for Ministry Monitoring Frameworks</strong><br><br>'
@@ -1760,14 +1760,17 @@ with tab5:
                    'train_E5: Practice Opportunities',
                    'train_E6: Follow-up Support',
                    'train_E7: Confidence Improvement'],
-        'MLR Coefficient (β)': [0.033, 0.167, 0.164, 0.161, 0.207, 0.141, 0.157],
-        'p-value': ['0.364', '<0.001','<0.001','<0.001','<0.001','<0.001','<0.001'],
+        'MLR Coefficient (beta)': ['0.033', '0.167', '0.164', '0.161',
+                                    '0.207', '0.141', '0.157'],
+        'p-value': ['0.364', 'less than 0.001', 'less than 0.001',
+                    'less than 0.001', 'less than 0.001',
+                    'less than 0.001', 'less than 0.001'],
         'Significant': ['No','Yes','Yes','Yes','Yes','Yes','Yes']
     })
     st.dataframe(att_qual_df, width='stretch')
 
     # SDG 4 Alignment
-    st.markdown("###  SDG 4 Alignment Tracker")
+    st.markdown("### 🌍 SDG 4 Alignment Tracker")
     st.markdown(
         '<span class="sdg-badge">SDG 4 — Quality Education</span>',
         unsafe_allow_html=True
@@ -1800,14 +1803,14 @@ with tab5:
 # TAB 6 — COHORT ANALYSIS
 # ============================================================
 with tab6:
-    st.markdown("##  Cohort Analysis")
+    st.markdown("## 📊 Cohort Analysis")
     st.markdown(
         "Upload a CSV of teacher survey responses for any cohort to generate "
         "readiness distributions, resource gap analysis, and infrastructure "
         "priority rankings."
     )
 
-    with st.expander(" Download Cohort Template"):
+    with st.expander("📋 Download Cohort Template"):
         cohort_template = pd.DataFrame({
             'conf_B2': [4,3,2,4,3], 'conf_B6': [4,3,2,3,4],
             'digi_C1c': [3,4,2,3,4], 'digi_C1d': [3,3,2,4,3],
@@ -1858,7 +1861,7 @@ with tab6:
             )
 
             # Summary
-            st.markdown("###  Cohort Summary")
+            st.markdown("### 📊 Cohort Summary")
             m1,m2,m3,m4 = st.columns(4)
             with m1: st.metric("Mean TRI", f"{hdf['TRI'].mean():.2f}")
             with m2: st.metric("Median TRI", f"{hdf['TRI'].median():.2f}")
@@ -1983,7 +1986,7 @@ with tab6:
 # TAB 7 — PROGRESS TRACKING
 # ============================================================
 with tab7:
-    st.markdown("##  Progress Tracking")
+    st.markdown("## 📈 Progress Tracking")
     st.markdown(
         "Track TRI scores across multiple assessments within this session "
         "to monitor change over time."
@@ -2062,7 +2065,7 @@ with tab7:
             else:
                 st.metric("Score Change", "N/A (need 2+ assessments)")
 
-        st.markdown("###  Export History")
+        st.markdown("### 📥 Export History")
         st.markdown(
             generate_csv_download(hist_df, "assessment_history.csv"),
             unsafe_allow_html=True
@@ -2079,7 +2082,7 @@ with tab7:
 with tab8:
     st.markdown("## ⚙️ Technical Documentation")
 
-    with st.expander(" Model Performance", expanded=True):
+    with st.expander("📊 Model Performance", expanded=True):
         st.markdown("""
         **Final Stacking Ensemble — Held-Out Test Set Performance ($n = 97$ teachers):**
         - R² = **0.9763**
@@ -2106,17 +2109,17 @@ with tab8:
         )
         st.plotly_chart(fig, width='stretch')
 
-    with st.expander(" Feature Importance (MLR Coefficients)"):
+    with st.expander("🔑 Feature Importance (MLR Coefficients)"):
         coef_df = pd.DataFrame({
             'Feature': ['conf_B2','conf_B6','digi_C1c','digi_C1d','digi_C2e',
                         'train_E5','res_D3','res_D5','train_E2','res_D1',
                         'res_D6','train_E3','train_E4','train_E7','res_D2',
                         'res_D4','train_E6','training_attended','Digital_x_Training'],
-            'Coefficient (β)': [0.461,0.452,0.308,0.298,0.257,
-                                 0.207,0.204,0.189,0.167,0.166,
-                                 0.165,0.164,0.161,0.157,0.152,
-                                 0.143,0.141,0.033,-0.002],
-            'Significant (p<0.05)': ['Yes']*17 + ['No','No']
+            'Coefficient': ['0.461','0.452','0.308','0.298','0.257',
+                            '0.207','0.204','0.189','0.167','0.166',
+                            '0.165','0.164','0.161','0.157','0.152',
+                            '0.143','0.141','0.033','-0.002'],
+            'Significant': ['Yes']*17 + ['No','No']
         })
         fig = px.bar(
             coef_df.head(10),
@@ -2129,7 +2132,7 @@ with tab8:
         st.plotly_chart(fig, width='stretch')
         st.dataframe(coef_df, width='stretch')
 
-    with st.expander(" Psychometric Validation"):
+    with st.expander("📐 Psychometric Validation"):
         st.markdown("""
         **Exploratory Factor Analysis (n = 840 calibration subsample):**
         - KMO = 0.952 (marvelous adequacy)
@@ -2160,7 +2163,7 @@ with tab8:
           — confirmed as genuine infrastructure gap, not measurement artefact
         """)
 
-    with st.expander(" Key Research Findings"):
+    with st.expander("🔑 Key Research Findings"):
         st.markdown("""
         1. **Pedagogical Confidence** is the strongest individual predictor (β = 0.461)
         2. **Training Quality** has the broadest distributional influence 
@@ -2175,7 +2178,7 @@ with tab8:
         7. **Urban-rural Digital Literacy gap = 0.819** scale points
         """)
 
-    with st.expander(" References"):
+    with st.expander("📚 References"):
         st.markdown("""
         - Bandura, A. (1997). *Self-efficacy: The exercise of control*. W.H. Freeman.
         - Chapman, P., et al. (2000). *CRISP-DM 1.0*. SPSS.
